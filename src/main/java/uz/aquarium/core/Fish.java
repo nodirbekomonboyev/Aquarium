@@ -22,6 +22,12 @@ public class Fish {
         this.gender = random.nextInt(2) == 1 ? Gender.MALE : Gender.FEMALE;
     }
 
+    private void move(){
+        int horizontal = random.nextInt(3) - 1;
+        int vertical = random.nextInt(3) - 1;
+        this.position = calculating(this.position, horizontal, vertical);
+    }
+
     private static int calculating(int position, int horizontal, int vertical) {
         if((position - 1) % 30 == 0){ horizontal = 1; }
         if(position % 30 == 0){ horizontal = -1; }
@@ -29,4 +35,6 @@ public class Fish {
         if(position > 870){ vertical = -1;}
         return (position + horizontal + 30 * vertical);
     }
+
+
 }
