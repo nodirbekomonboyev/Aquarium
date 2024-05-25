@@ -22,6 +22,15 @@ public class Fish {
         this.gender = random.nextInt(2) == 1 ? Gender.MALE : Gender.FEMALE;
     }
 
+    private boolean checkTime(){
+        if(lifeTime == 0) {
+            fishService.killFish(this);
+            return false;
+        }
+        lifeTime--;
+        return true;
+    }
+
     private void move(){
         int horizontal = random.nextInt(3) - 1;
         int vertical = random.nextInt(3) - 1;
