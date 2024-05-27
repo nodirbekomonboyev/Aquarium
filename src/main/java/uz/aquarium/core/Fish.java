@@ -31,6 +31,8 @@ public class Fish {
         return true;
     }
 
+
+
     private void move(){
         int horizontal = random.nextInt(3) - 1;
         int vertical = random.nextInt(3) - 1;

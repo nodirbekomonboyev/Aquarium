@@ -16,4 +16,14 @@ public class FishService {
         list.remove(fish);
     }
 
+    public ArrayList<Fish> getList(Filter filter){
+        ArrayList<Fish> newList = new ArrayList<>();
+        for (Fish fish : list) {
+            if(filter.check(fish)){
+                newList.add(fish);
+            }
+        }
+        return newList;
+    }
+
 }
