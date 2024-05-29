@@ -43,4 +43,23 @@ public class FishService {
         return map;
     }
 
+    public String display(){
+        Map<Integer, Integer> map = getMap();
+        StringBuilder result = new StringBuilder();
+        for (int i = 1; i <= 900; i++) {
+            if((i - 1) % 30 == 0){
+                result.append(" |");
+            }
+            if(map.containsKey(i)){
+                result.append(" ").append(map.get(i)).append(" ");
+            }else {
+                result.append("   ");
+            }
+            if(i % 30 == 0){
+                result.append("| \n");
+            }
+        }
+        return result.toString();
+    }
+
 }
