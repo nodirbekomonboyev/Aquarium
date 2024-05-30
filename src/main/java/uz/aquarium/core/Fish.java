@@ -4,12 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 @AllArgsConstructor
 @Getter
 @Setter
-public class Fish {
+public class Fish implements Runnable{
     private int position;
     private int lifeTime;
     private Gender gender;
@@ -31,7 +32,15 @@ public class Fish {
         return true;
     }
 
-
+    private void checkPropagation(){
+        if(this.gender == Gender.FEMALE) return;
+        ArrayList<Fish> list = fishService.getList(f -> f.position == this.position);
+        for (Fish fish : list) {
+            if(fish.gender == Gender.FEMALE){
+                fishService.add(new Fish());
+            }
+        }
+    }
 
     private void move(){
         int horizontal = random.nextInt(3) - 1;
@@ -47,5 +56,11 @@ public class Fish {
         return (position + horizontal + 30 * vertical);
     }
 
-
+    @Override
+    public void run() {
+        if(checkTime()){
+            move();
+            checkPropagation();
+        }
+    }
 }
