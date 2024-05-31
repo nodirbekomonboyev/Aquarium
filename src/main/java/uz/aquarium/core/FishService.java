@@ -62,4 +62,7 @@ public class FishService {
         return result.toString();
     }
 
+    public void runFishes() {
+        list.forEach(Fish::run);
+    }
 }
