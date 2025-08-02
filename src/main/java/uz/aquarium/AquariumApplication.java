@@ -25,6 +25,7 @@ public class AquariumApplication {
             Thread.sleep(500);
             fishService.runFishes();
             System.out.println("\r" + fishService.display());
-        }    }
+        }
+    }
 
 }
