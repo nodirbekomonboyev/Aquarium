@@ -27,5 +27,4 @@ public class AquariumApplication {
             System.out.println("\r" + fishService.display());
         }
     }
-
 }
