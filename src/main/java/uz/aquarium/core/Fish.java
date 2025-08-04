@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 @AllArgsConstructor
@@ -14,10 +15,15 @@ public class Fish implements Runnable{
     private int position;
     private int lifeTime;
     private Gender gender;
+    private Long id;
+    private Long father;
     private static Random random = new Random();
     private static FishService fishService = new FishService();
 
+
     public Fish() {
+        this.id = new Random().nextLong();
+        this.father = new Random().nextLong();
         this.lifeTime = random.nextInt(100, 500);
         this.position = random.nextInt(901);
         this.gender = random.nextInt(2) == 1 ? Gender.MALE : Gender.FEMALE;
@@ -36,8 +42,10 @@ public class Fish implements Runnable{
         if(this.gender == Gender.FEMALE) return;
         ArrayList<Fish> list = fishService.getList(f -> f.position == this.position);
         for (Fish fish : list) {
-            if(fish.gender == Gender.FEMALE){
-                fishService.add(new Fish());
+            if(fish.gender == Gender.FEMALE && !Objects.equals(fish.father, this.id)){
+                Fish newFish = new Fish();
+                newFish.father = this.id;
+                fishService.add(newFish);
             }
         }
     }
